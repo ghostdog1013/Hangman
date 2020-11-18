@@ -1,0 +1,46 @@
+# Yilun Liu
+# HW4
+# Explanation for the bugs I identified
+
+
+PS: The lines numbers are the ones in the hangman.py file I submitted. It might be different to the original hangman file when I downloaded it. 
+
+Error 1: 
+On line 94, it was originally an "if" statement. This is an error because when the play function calls the get_guess function, the if statement will only execute once if the conditions are met. The while loop will be the correct one, since it ensures that 
+1. the letter is not one has guessed previously
+2. it is a letter
+3. it is one letter. 
+
+The while loop will continue to prompt the user to meet these requirements, whereas the if statement only does it once. So simply change the "if" to "while".I find this because before, the system only examines the first time I entered. 
+
+Error 2: 
+On line 94 and line 98, guess.isalpha() returns true if all the characters in the string are alphabets. Otherwise, it will return false. On these two lines, we try to avoid the users to enter non-alphabets, so we need to set the condition "guess.isalpha()==False". In this case, if they enter a non-alphabet, the system to ask them to re-enter or prompt "That is not a letter". I found this logical error when I first examine the code in the file. 
+
+
+Error 3: 
+On line 104, I appended the variable "guess" on the list "guessed" every time the user inputs a new letter. I put it at the end of the while loop so that the list contains all legal letters of length 1 and those not guessed previously by the user. 
+
+If I do not append the letter to the list, then the list will be an empty one. Then the letters the user guessed will always be empty and the guesses remaining will always be 10. I find it because before, the guesses remaining is always 10. 
+
+Error 4: 
+On line 113 and 115, I replace the last line the readlines function reads. If I don't do that, the word variable will contain an extra line. I used another variable "word_1" to represent the random word with the extra line. And, I use a variable "word" to have it replace the last line with nothing (""). 
+
+Error 5: 
+On line 127, I added "and guesses !=0". 
+This ensures that when there is 0 guesses remaining, the system will not take any more guesses. I found this error because before that, even though the guesses is zero, I can still take a guess(an extra guess that is not suppose to have). 
+
+Error 6: 
+On line 144 and 145, I deleted 	#else:                                                         
+                		#    current[i] = "_"
+
+This is, personally speaking, the most annoying bugs in the program. Before previously, every time I guess another correct letter, the prior ones get overwritten. Because previously, the for loop already put dash lines on every index of list "current", doing it again here (if the letter the user guessed is not within the correct word) will overwrite the correctly guessed letters. 
+
+Deleting these two lines ensures that they do not get overwritten, and the newly guessed correct letters are appended to the line. Wonderful! 
+
+
+
+
+
+
+
+
